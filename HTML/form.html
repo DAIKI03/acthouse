@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Form</title>
+	<link rel="stylesheet" type="text/css" href="css/form.css">
+</head>
+<body>
+	<form method="post" action="" enctype="maltipart/formdata">
+	  <fieldset>
+	  	<legend>お名前</legend>
+	  	<input type="text" name="name" placeholder="お名前を入力">
+	  </fieldset>
+	  <fieldset>
+	  	<legend>パスワード</legend>
+	  	<input type="password" name="password" size="30" maxlength="18" title="半角英数字で入力してください" required="required">
+	  </fieldset>
+	  <!-- fieldset>legend{パスワード}+input[type=password name=password size=30 maxlength=18 title=半角英数字で入力してください required] -->
+	  <fieldset>
+	  	<legend>電話番号</legend>
+		  	<input type="tell" name="telNumber" size="30" 
+		  	maxlength="17" placeholder="00-0000-0000"
+		  	title="市街局番からハイフン(-)を入れて記入してください">					
+	  </fieldset>
+	  <fieldset>
+	  	<legend>郵便番号</legend>
+	  	<input type="text" name="zipCode" 
+	  	placeholder="123-456" 
+	  	size="20"
+	  	maxlength="8"
+	  	title="３桁＋ハイフン(-)＋４桁で入力してください"
+	  	pattern="\d{3}-?\d{4}">
+	  </fieldset>
+	  <fieldset>
+	  	<legend>好きなセブのショッピングモール</legend>
+	  	<input type="text" name="mall" size="30"
+	  	placeholder="ショッピングモール"
+	  	list="malls" required>
+	  	<datalist id="malls">
+	  		<option value="アヤラモール"></option>
+	  		<option value="SMモール"></option>
+	  		<option value="カントリーモール"></option>
+	  		<option value="JYスクエアモール"></option>	
+	  	</datalist>
+	  </fieldset>
+	  <fieldset>
+	  	<legend>乗り物</legend>
+	  	<label>
+	  		<input type="checkbox" name="vehicle" value="タクシー">タクシー	
+	  	</label>
+	  	<label>
+	  		<input type="checkbox" name="vehicle" value="ジプニー">ジプニー	
+	  	</label>
+	  	<label>
+	  		<input type="checkbox" name="vehicle" value="バイタク">バイタク	
+	  	</label>
+	  	<label>
+	  		<input type="checkbox" name="vehicle" value="その他">その他	
+	  	</label>
+	  </fieldset>
+		<fieldset>
+			<legend>ご回答</legend>
+			<label>
+				<input type="radio" name="replay" value="回答１" checked="">回答１
+			</label>
+			<label>
+				<input type="radio" name="replay" value="回答２">回答２
+			</label>
+			<label>
+				<input type="radio" name="replay" value="回答３">回答３
+			</label>
+			</fieldset>
+			<fieldset>
+				<legend>都道府県</legend>
+				<select name="pref">
+				  <option value="">------ 洗濯してください ------</option>
+				  <optgroup label="関東">
+				  	<option value="東京都">東京都</option>
+				  	<option value="神奈川県">神奈川県</option>
+				  </optgroup>
+				  <optgroup label="関西">
+				  	<option value="たこやき">たこやき</option>
+				  	<option value="京都府">今日とふ</option>
+				  	<option value="奈良県">奈良漬</option>
+				  	<option value="兵庫県">兵庫県</option>
+				  	<option value="和歌山県">和歌山県</option>
+				  </optgroup>
+				  <optgroup label="四国">
+				  	<option value="徳島県">徳島県</option>
+				  	<option value="UDON県">UDON県</option>
+				  	<option value="高知県">高知県</option>
+				  	<option value="みかん県">みかん県</option>
+				  </optgroup>
+				  <optgroup label="アジア">
+				  	<option value="セブ">セブ島</option>
+				  	<option value="インド県">インド県</option>
+				  </optgroup>
+				</select>
+			</fieldset>
+			<fieldset>
+				<legend>感想をお聞かせください</legend>
+				<textarea name="impression" cols="30" rows="10" placeholder="感想を入れてください"></textarea>
+			</fieldset>
+			<fieldset>
+				<legend>画像</legend>
+				<input type="file" name="file" accept="image/png">
+			</fieldset>
+			<input type="hidden" name="secret" value="秘密の情報">
+		<p>
+			<input type="submit" name="送信する" value="！！！">
+			<input type="button" value="ただのボタン">
+			<button>buttonタグのsubmit</button>
+			<button type="button">buttonタグのただのボタン</button>
+		</p>
+	</form>
+</body>
+</html>

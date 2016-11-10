@@ -1,0 +1,179 @@
+html, body,
+ul, ol, li,
+h1, h2, h3, h4, h5, h6, p,
+form, input, div {
+  margin: 0;
+  padding: 0;
+}
+li {
+	list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #323a45;
+  transition: all .3s;
+}
+h2 p li {
+	color: #333;
+}
+
+/*---- start header----*/
+.wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1280px;
+  min-height: 100%;
+  z-index: 1;
+}
+header {
+	padding: 10px 22px 0 128px;
+	height: 52px;
+	position: fixed;
+	width: 1240px;
+	z-index: 2;
+	background-color: rgba(255,255,255, 0.9);
+}
+.header-box {
+	width: 1000px;
+}
+.header-left {
+	float: left;
+}
+.header-right {
+	float: right;
+}
+.header-right li {
+	display: inline-block;
+	font-size: 14px;
+	padding-top: 7px;
+	padding-left: 24px;
+	line-height: 2.3;
+}
+.header-left h2 {
+	line-height: 1.85714;
+}
+.header-left span {
+	font-size: 21px;
+	font-weight: 300;
+	line-height: 1;
+	letter-spacing: normal;
+}
+.apple {
+	background-color: #2189db;
+	background: linear-gradient(#42a1ec, #0070c9);
+	color: #fff;
+	padding: 3px 10px;
+	font-weight: 500;
+	letter-spacing: normal;
+	border-radius: 3px;
+}
+.header-right a:hover {
+	color: #0070c9;
+}
+/*------- start main ------*/
+.top-image {
+	width: 1280px;
+	height: 660px;
+	background-size: cover;
+  background-repeat: no-repeat; 
+  background-image: url(../images/applewatch2.jpg);
+  text-align: center;
+  position: relative;
+}
+/*.discription {
+	width: 300px;
+	height: 100px;
+	font-size: 40px;
+	position: absolute;
+	top: 250px;
+	left: 490px;
+}*/
+.discription p {
+	font-weight: 300;
+	font-size: 21px;
+	line-height: 1;
+	letter-spacing: normal;
+}
+.discription2 {
+	width: 300px;
+	height: 100px;
+	font-size: 50px;
+	font-style: normal;
+	position: absolute;
+	top: 610px;
+	left: 490px;
+}
+.discription2 h4 {
+	font-weight: 200;
+	font-size: 40px;
+	line-height: 1;
+	letter-spacing: normal;
+}
+
+/*------ section start --------*/
+.section1 {
+	width: 1280px;
+	height: 640px;
+	background-size: cover;
+  background-repeat: no-repeat; 
+  background-image: url(../images/applewatch3.jpg);
+  text-align: center;
+  position: relative;
+}
+.section2 {
+	width: 1280px;
+	height: 640px;
+	background-size: cover;
+  background-repeat: no-repeat; 
+  background-image: url(../images/sports.jpg);
+  text-align: center;
+  position: relative;
+}
+.inner-bg {
+	padding-top: 640px;
+	background-color: rgba(0,0,0, 0.3);
+}
+.inner-bg2 {
+	padding-top: 640px;
+	background-color: rgba(0,0,0, 0.4);
+}
+.discription3 {
+	width: 510px;
+	height: 100px;
+	color: #fff;
+	line-height: 1.33349;
+	letter-spacing: 3px;
+	font-style: normal;
+	position: absolute;
+	top: 200px;
+	left: 400px;
+}
+.discription3 h1 {
+	font-size: 50px;
+	margin-bottom: 40px;
+}
+.discription3 p {
+	font-size: 19px;
+	padding-right: 40px; 
+}
+
+.discription4 {
+	width: 580px;
+	height: 100px;
+	color: #fff;
+	font-style: normal;
+	line-height: 1.33349;
+	letter-spacing: 3px;
+	position: absolute;
+	top: 200px;
+	left: 390px;
+}
+.discription4 h1 {
+	font-size: 50px;
+	margin-bottom: 50px;
+}
+.discription4 p {
+	font-size: 19px;
+	padding-right: 40px;
+}

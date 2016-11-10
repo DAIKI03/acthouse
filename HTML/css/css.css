@@ -1,0 +1,77 @@
+div {
+	width: 100px;
+	height: 100px;
+	background-color: aqua;
+	float: left;
+}
+hr {
+	clear: both;
+}
+#radius1 {
+	border-radius: 10px;
+}
+#radius2 {
+	border-radius: 50px;
+}
+#radius3 {
+	height: 50px;
+	border-radius: 50%;
+}
+#radius4 {
+	border-radius: 0px 10px 20px 30px;
+}
+#radius5 {
+	border-radius: 30px 30px 0 0;
+}
+#radius6 {
+	border-radius: 30px 0 0 30px;
+	background-color: pink; 
+}
+#radius7 {
+	border-radius: 0 30px 30px 0;
+	background-color: red;
+}
+#radius8 {
+	border-radius: 10px 20px 30px 40px / 30px 40px 50px 60px;
+}
+#radius9 {
+	border-top-left-radius: 30px;
+	border-bottom-right-radius: 40px; 
+}
+#radius10 {
+	border-radius: 50%;
+	background-color: red; 
+}
+#radius11 {
+	border-radius: 50%;
+	background-color: yellow; 
+}
+#radius12 {
+	border-radius: 50%;
+	background-color: green; 
+}
+#radius13 {
+	border-top-right-radius: 70px;
+	border-bottom-left-radius: 70px;
+	background-color: #800000;
+}
+#radius14 {
+	border-radius: 10px 0 50px 50px;
+	background-color: #ffa07a; 
+}
+#radius15 {
+	border-radius: 0 10px 50px 50px;
+	background-color: #ffa07a;
+}
+#box-shadow {
+	width: 50%;
+	height: 50px;
+	background-color: darkgreen;
+	box-shadow: 8px 12px 10px #000 inset;
+}
+h1#title {
+	color: #ffd700;
+	font-size: 3em;
+	text-shadow: 13px 9px 9px #b0c4de,
+	              5px 5px 5px red;
+}

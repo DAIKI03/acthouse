@@ -1,0 +1,149 @@
+    body {
+    	width: 100%;
+    	margin: 0;
+    	padding: 0;
+    	color: #666;
+    	line-height: 24px;
+    	/*background: #ececec;*/
+    	/*background: url(../images/pattern.jpg) ;*/
+    	background: linear-gradient(white, black)
+    }
+    div {
+	  	color: #666666;
+	  	width: 100%;
+	  	margin-top: 20px;
+	  	margin-right: auto;
+	  	margin-left: auto;
+	  	overflow: hidden;
+	  }
+	  div.main {
+	  	width: 70%;
+	  	float: left;
+	  }
+	  div.sidebar {
+	  	width: 30%;
+	  	float: left;
+	  }
+	  div.sidemenu {
+
+	  }
+	  #container {
+	  	width: 960px;
+	  	margin: 0 auto;
+	  	padding: 30px;
+	  	background: #ffffff;
+	  }
+	  header {
+	  	padding: 30px;
+	  	background: #ececec;
+	  	font-size: 30px;
+	  	color: white;
+	  	background: linear-gradient(to bottom right, #ffff00 10%, #fcc 18%, #ff4500 35%, #cf6 50%, #3cc 70%, #006 90%);
+	  	/* safari moz ベンダープレフィックス*/
+	  	background: -webkit-linear-gradient(to bottom right, #ffff00 10%, #fcc 18%, #ff4500 35%, #cf6 50%, #3cc 70%, #006 90%);
+	  	background: -moz-linear-gradient(to bottom right, #ffff00 10%, #fcc 18%, #ff4500 35%, #cf6 50%, #3cc 70%, #006 90%);
+	  	text-align: center;
+	  }
+	  footer {
+	  	font: bold 80%/1em;
+	  	color: black;
+	  	text-align: center;
+	  	padding: 10px;
+	  	background: #0000;
+	  	background: radial-gradient(circle at center, #ffff00 20%, #fcc 40%, #ff4500 70%, #0000cd 100%);
+	  }
+
+	  h1 {
+	  	font-weight: bold;
+	  	font-size: 240%;
+	  }
+	  span {
+	  	color: #009900;
+	  }
+    /*Here is Comment!*/
+		h1 {
+			color: #ffd700;
+			font-size: 30px;
+		}
+		h2 {
+			clear: both;
+		}
+		img {
+			float: left;
+			margin-bottom: 24px;
+			margin-right: 36px;
+			border-style: : none;
+		}
+		a {
+			font-size: 120%;
+			font-weight: bold;
+			color: #0000ff;
+			text-decoration: none;
+		}
+		a:link{
+ 			color: green;
+		}
+
+		a:hover {
+			color: #0000cd;
+			font-style: oblique;
+		}
+		a:active {
+			color: blue;
+		}
+		.btn {
+			display: inline-block;
+		}
+		.btn a {
+			background: url(../images/btngreen.gif) no-repeat left top;
+			width: 140px;
+			height: 50px;
+			display: block;
+			color: #ffffff;
+			font-size: 10px;
+			line-height: 36px;
+			text-align: center;
+		}
+		.btn a:hover {
+			background: url(../images/btngreen.gif) no-repeat right top;
+		}
+		dl {
+			text-align: left;
+			color: black;
+		}
+		dt {
+			color: blue;
+		}
+		dl.sidemenu {
+			margin: 0;
+			padding: 0 0 5px;
+			background: #dff4e7;
+			width: 240px;
+		}
+		dl.sidemenu dt {
+			background:  url(../images/dt_bg.jpg) repeat-x;
+			height: 32px;
+			width: 240px;
+			font-size: 15px;
+			line-height: 32px;
+			font-weight: bold;
+			text-indent: 0.7em;
+			margin-bottom: 5px;
+			color: #fff;
+		}
+		dl.sidemenu dd {
+			font-size: 12px;
+			line-height: 18px;
+			height: 18px;
+			text-indent: 0.7em;
+			margin: 0px;
+			padding-bottom: 5px;
+		}
+		dl.sidemenu dd a {
+			color: #666;
+			text-decoration: none;
+			padding-left: 14px;
+		}
+		dl.sidemenu dd a:hover {
+			color: #f90;
+		}

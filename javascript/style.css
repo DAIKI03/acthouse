@@ -1,0 +1,30 @@
+div {
+	width: 100px;
+	height: 100px;
+	background-color: pink;
+}
+
+#div2 {
+	width: 100px;
+	height: 100px;
+	transition-property: font-size, width, border-radius, background-color;
+	transition-duration: 0.6s:  
+}
+#container {
+	width: 300px;
+	height: 300px;
+	overflow: auto;
+}
+
+/*直接の子要素にだけ適用*/
+#container > div { 
+	background-color: yellow;
+	width: 15%;
+	height: 15%;
+	border: 1px solid black;
+	float: left;
+}
+
+#container .child {
+	background-color: pink;
+}
