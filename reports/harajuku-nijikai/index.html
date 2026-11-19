@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>原宿 二次会バー候補</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Night-bar palette: ink navy on cool paper with a brass accent. Layout: one reading column; cards for picks and venues; wide tables scroll inside their own box. */
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --ink: #161b26;
+  --muted: #566071;
+  --line: #d8dce4;
+  --accent: #8a5d14;
+  --accent-soft: #f4ead8;
+  --ok: #1f6f4f;
+  --warn: #9a4f00;
+  --ng: #a3262a;
+  --ask: #5c6474;
+  --font-display: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-body: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11141b;
+    --surface: #191e28;
+    --ink: #e9eaee;
+    --muted: #a3aab8;
+    --line: #2b3242;
+    --accent: #d9ad5f;
+    --accent-soft: #2c2618;
+    --ok: #6cc59a;
+    --warn: #f0a656;
+    --ng: #f08a8d;
+    --ask: #a3aab8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11141b;
+  --surface: #191e28;
+  --ink: #e9eaee;
+  --muted: #a3aab8;
+  --line: #2b3242;
+  --accent: #d9ad5f;
+  --accent-soft: #2c2618;
+  --ok: #6cc59a;
+  --warn: #f0a656;
+  --ng: #f08a8d;
+  --ask: #a3aab8;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.35; margin: 0; }
+h1 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); letter-spacing: 0.02em; }
+h2 { font-size: 1.45rem; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 1.15rem; }
+h4 { font-size: 0.9rem; margin: 0 0 6px; color: var(--muted); font-weight: 700; }
+.masthead { padding: 40px 0 28px; border-bottom: 1px solid var(--line); background: var(--surface); }
+.masthead .wrap { display: grid; gap: 12px; }
+.eyebrow { margin: 0; color: var(--accent); font-size: 0.85rem; letter-spacing: 0.08em; font-weight: 500; }
+.lede { margin: 0; max-width: 46em; color: var(--muted); }
+.conds { list-style: none; padding: 0; margin: 8px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px 16px; }
+.conds li { display: grid; gap: 2px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); font-size: 0.93rem; }
+.conds span { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; }
+main section { padding: 34px 0 6px; }
+.summary { margin: 0; padding: 16px 18px 16px 2.2em; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; display: grid; gap: 8px; max-width: 62em; }
+.section-note, .legend, .map-note { color: var(--muted); font-size: 0.88rem; margin: 6px 0 0; max-width: 62em; }
+.section-note { margin: 0 0 12px; }
+.picks { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.pick { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 8px; padding: 16px 18px; display: grid; gap: 6px; align-content: start; }
+.pick-backup { border-top-color: var(--muted); }
+.pick-no { margin: 0; font-size: 0.8rem; color: var(--accent); font-weight: 700; letter-spacing: 0.04em; }
+.pick-backup .pick-no { color: var(--muted); }
+.pick h3 a { color: var(--ink); text-decoration: none; }
+.pick h3 a:hover { text-decoration: underline; }
+.pick-genre, .venue-genre, .tgenre { margin: 0; color: var(--muted); font-size: 0.85rem; }
+.pick-key { margin: 0; font-size: 0.92rem; }
+.pick-why { margin: 4px 0 0; font-size: 0.92rem; padding-top: 8px; border-top: 1px dashed var(--line); }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+.rank-table { min-width: 1000px; }
+.plain-table { min-width: 640px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+thead th { font-size: 0.78rem; color: var(--muted); font-weight: 500; letter-spacing: 0.04em; background: var(--bg); }
+tbody tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--accent); }
+.nowrap { white-space: nowrap; }
+.tname { font-weight: 700; color: var(--ink); text-decoration: none; display: block; }
+.tname:hover { text-decoration: underline; }
+.tgenre { display: block; }
+.marks { display: flex; flex-wrap: wrap; gap: 4px; min-width: 230px; }
+.mark { display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; font-size: 0.75rem; white-space: nowrap; }
+.mark-k { color: var(--muted); }
+.mark-v { font-weight: 700; }
+.m-best .mark-v, .m-ok .mark-v { color: var(--ok); }
+.m-weak .mark-v { color: var(--warn); }
+.m-ng .mark-v { color: var(--ng); }
+.m-ask .mark-v { color: var(--ask); }
+.map-box { display: grid; gap: 8px; justify-items: start; }
+.map { width: 100%; max-width: 560px; height: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.map .ring { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 5 5; }
+.map .ring-label, .map .north { fill: var(--muted); font-size: 12px; font-family: var(--font-body); }
+.map .station { fill: var(--surface); stroke: var(--muted); stroke-width: 1.5; }
+.map .station-label { fill: var(--muted); font-size: 12px; font-family: var(--font-body); }
+.map .origin { fill: var(--ink); }
+.map .origin-label { fill: var(--ink); font-size: 13px; font-weight: 700; font-family: var(--font-body); }
+.map .pin circle { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+.map .pin text { fill: var(--accent); font-size: 12px; font-weight: 700; font-family: var(--font-body); }
+.map .pin.top circle { fill: var(--accent); }
+.map .pin.top text { fill: var(--surface); }
+.venues { display: grid; gap: 18px; }
+.venue { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; display: grid; gap: 12px; scroll-margin-top: 16px; }
+.venue-head { display: flex; gap: 14px; align-items: center; }
+.rank { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill { font-size: 0.78rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.pill-ok { border-color: var(--ok); color: var(--ok); }
+.pill-warn { border-color: var(--warn); color: var(--warn); }
+.pill-ng { border-color: var(--ng); color: var(--ng); }
+.pill-accent { border-color: var(--accent); color: var(--accent); }
+.facts-dl { margin: 0; display: grid; border-top: 1px solid var(--line); }
+.facts-dl > div { display: grid; grid-template-columns: 11.5em 1fr; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.facts-dl dt { color: var(--muted); font-size: 0.85rem; }
+.facts-dl dd { margin: 0; font-size: 0.93rem; overflow-wrap: anywhere; }
+.links { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; }
+.tel { font-variant-numeric: tabular-nums; font-weight: 500; }
+.procon { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px 24px; }
+.procon ul, .ask ol { margin: 0; padding-left: 1.3em; font-size: 0.92rem; }
+.ask { background: var(--bg); border-radius: 6px; padding: 12px 14px; }
+.schedule { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; max-width: 62em; border-left: 2px solid var(--accent); }
+.schedule li { display: grid; grid-template-columns: 9.5em 1fr; gap: 2px 16px; padding: 10px 0 10px 16px; border-bottom: 1px solid var(--line); }
+.sch-date { font-weight: 700; font-variant-numeric: tabular-nums; grid-row: span 2; }
+.sch-todo { font-size: 0.95rem; }
+.sch-note { color: var(--muted); font-size: 0.85rem; }
+.check { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; max-width: 62em; }
+.check li { padding-left: 4px; }
+.ck-title { font-weight: 700; display: block; }
+.ck-detail { color: var(--muted); font-size: 0.92rem; display: block; }
+.notes, .sources { margin: 0; padding-left: 1.2em; font-size: 0.9rem; display: grid; gap: 4px; max-width: 62em; }
+.sources { overflow-wrap: anywhere; }
+h3.sub { font-size: 1rem; margin: 22px 0 8px; }
+.foot { padding: 30px 20px 40px; color: var(--muted); font-size: 0.82rem; }
+@media (max-width: 560px) {
+  .facts-dl > div, .schedule li { grid-template-columns: 1fr; }
+  .sch-date { grid-row: auto; }
+  .masthead { padding-top: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">二次会の会場候補 ・ 2026年11月19日時点の調査</p>
+    <h1>原宿 二次会バー候補</h1>
+    <p class="lede">一次会「原宿しずる」（渋谷区神宮前4-26-28）から歩いて行ける、15〜20名で座れるバー・ラウンジの候補です。公開情報だけで全条件を満たすと確認できた店はなく、上位の店ほど電話での確認が決め手になります。</p>
+    <ul class="conds">
+      <li><span>日時</span>2026年12月17日(木) 21:00頃から約2時間</li>
+      <li><span>人数</span>15〜20名、全員着席</li>
+      <li><span>予算</span>1人3,000〜5,000円（雰囲気を優先し、多少の超過は可）</li>
+      <li><span>距離</span>原宿しずるから徒歩5分以内を優先、最大10分</li>
+    </ul>
+  </div>
+</header>
+<main class="wrap">
+  <section id="summary" aria-labelledby="h-summary">
+    <h2 id="h-summary">結論</h2>
+    <ul class="summary"><li>徒歩5分以内、10分以内のどちらでも、全条件（15〜20名全員着席、個室か貸切、木曜21〜23時、バーらしい雰囲気、1人3,000〜5,000円）を満たすと確認できた店はありませんでした。</li><li>理由は人数です。15〜20名は、このエリアの個室（最大でも6〜13名）には多すぎ、貸切の下限（20〜50名）には少なすぎます。近くのバーは7〜25席の小さな店が中心で、雰囲気のよい広めの店ほど21〜22時に閉まります。</li><li>おすすめは、徒歩2分の地下バー空間を店ごと借りられる cafe&amp;bar natural stance、路地裏ビル3階の隠れ家ジャズバー Bar dAZE、雰囲気と営業の確かさが一番の SSSSS（ストップザシーズンインザサン）の3店です。</li><li>12/17 21:00の15名・20名の枠がWebで確認できたのは chill（2時間飲み放題付き4,500円・税込）だけです。雰囲気はカジュアル寄りなので、保険として押さえる候補にしています。</li><li>最終人数が20名に近いなら natural stance、15〜16名なら Bar dAZE が有利です。本番まで約4週間なので、上位4店へ早めに電話し、条件をメールなどの書面でもらってから決めるのが確実です。</li></ul>
+  </section>
+
+  <section id="picks" aria-labelledby="h-picks">
+    <h2 id="h-picks">特におすすめの3店と保険</h2>
+    <div class="picks">
+<article class="pick">
+  <p class="pick-no">おすすめ 1 ・ ランキング1位</p>
+  <h3><a href="#v1">cafe&amp;bar natural stance</a></h3>
+  <p class="pick-genre">地下のカフェバー（店舗貸切型）</p>
+  <p class="pick-key"><strong>徒歩85m・2分</strong> ・ 40〜50席・店舗貸切（8万円か10万円〜）</p>
+  <p class="pick-key">20名なら4,000〜5,000円（貸切額÷人数）</p>
+  <p class="pick-why">地下のバー空間を店ごと借りられ、20名なら1人4,000〜5,000円に収まる計算。まず「今も夜に営業しているか」を電話で確認します。</p>
+</article>
+<article class="pick">
+  <p class="pick-no">おすすめ 2 ・ ランキング2位</p>
+  <h3><a href="#v2">Bar dAZE（バー デイズ）</a></h3>
+  <p class="pick-genre">隠れ家ジャズバー（ビル3階）</p>
+  <p class="pick-key"><strong>徒歩360m・5分</strong> ・ 21〜25席・〜20名で貸切可</p>
+  <p class="pick-key">予算表示3,000〜3,999円＋チャージ700円</p>
+  <p class="pick-why">路地裏ビル3階のジャズバーで、「隠れ家のバー」に一番近い店です。15〜16名ならテーブルとソファーに全員座れる計算。2026年も営業しているかの確認が先です。</p>
+</article>
+<article class="pick">
+  <p class="pick-no">おすすめ 3 ・ ランキング3位</p>
+  <h3><a href="#v3">ストップザシーズンインザサン（SSSSS）</a></h3>
+  <p class="pick-genre">自然派ワインのバル＋ラウンジ（2階）</p>
+  <p class="pick-key"><strong>徒歩520m・7分</strong> ・ 着席43名・半貸切は20名〜相談</p>
+  <p class="pick-key">6,600〜7,330円（1,600〜2,330円超過）</p>
+  <p class="pick-why">雰囲気は候補中もっとも洗練され、2026年の営業も確認済み。1人1,600円以上の予算超過と、15〜19名で半貸切できるかが論点です。</p>
+</article>
+<article class="pick pick-backup">
+  <p class="pick-no">保険 ・ ランキング4位</p>
+  <h3><a href="#v4">chill チル 原宿 表参道店</a></h3>
+  <p class="pick-genre">カフェ×肉バル（地下1階）</p>
+  <p class="pick-key"><strong>徒歩360m・5分</strong> ・ L字ソファー21名・20名〜貸切</p>
+  <p class="pick-key">4,500円（税込・2時間飲み放題付き）</p>
+  <p class="pick-why">Webで12/17 21:00・15名／20名の枠が出た唯一の店。4,500円（税込）で予算内、全席禁煙。雰囲気が「カフェ居酒屋×肉バル」とカジュアルなので、上位3店がだめだった場合の保険にします。</p>
+</article></div>
+  </section>
+
+  <section id="ranking" aria-labelledby="h-ranking">
+    <h2 id="h-ranking">候補ランキング（条件との一致度順）</h2>
+    <p class="section-note">「バーらしい落ち着き」「15〜20名がまとまって座れること」「徒歩5分以内」を重く見て、「21〜23時の営業」を必須、「予算」と「ドリンク中心のプラン」を補助条件にしました。どの店にも何らかの未確認点があるため、順位は「電話で未確認点が解消したとき、条件にどこまで近づくか」の順でもあります。</p>
+    <div class="table-wrap">
+      <table class="rank-table">
+        <thead><tr><th>順位</th><th>店名</th><th>徒歩</th><th>席・個室/貸切</th><th>1人あたり</th><th>営業（木）</th><th>12/17</th><th>条件との一致</th></tr></thead>
+        <tbody>
+<tr>
+  <td class="num">1</td>
+  <td><a href="#v1" class="tname">cafe&amp;bar natural stance</a><span class="tgenre">地下のカフェバー（店舗貸切型）</span></td>
+  <td class="nowrap">85m・2分</td>
+  <td>40〜50席・店舗貸切（8万円か10万円〜）</td>
+  <td>20名なら4,000〜5,000円（貸切額÷人数）</td>
+  <td>〜23:00（夜営業の現況は要確認）</td>
+  <td>要問い合わせ</td>
+  <td><div class="marks"><span class="mark m-best"><span class="mark-k">距離</span><span class="mark-v">◎</span></span><span class="mark m-best"><span class="mark-k">全員着席</span><span class="mark-v">◎</span></span><span class="mark m-ok"><span class="mark-k">個室・貸切</span><span class="mark-v">○</span></span><span class="mark m-ok"><span class="mark-k">予算</span><span class="mark-v">○</span></span><span class="mark m-ok"><span class="mark-k">雰囲気</span><span class="mark-v">○</span></span></div></td>
+</tr>
+<tr>
+  <td class="num">2</td>
+  <td><a href="#v2" class="tname">Bar dAZE（バー デイズ）</a><span class="tgenre">隠れ家ジャズバー（ビル3階）</span></td>
+  <td class="nowrap">360m・5分</td>
+  <td>21〜25席・〜20名で貸切可</td>
+  <td>予算表示3,000〜3,999円＋チャージ700円</td>
+  <td>19:00〜翌3:00（営業継続は要確認）</td>
+  <td>要問い合わせ</td>
+  <td><div class="marks"><span class="mark m-ok"><span class="mark-k">距離</span><span class="mark-v">○</span></span><span class="mark m-weak"><span class="mark-k">全員着席</span><span class="mark-v">△</span></span><span class="mark m-ok"><span class="mark-k">個室・貸切</span><span class="mark-v">○</span></span><span class="mark m-ok"><span class="mark-k">予算</span><span class="mark-v">○</span></span><span class="mark m-best"><span class="mark-k">雰囲気</span><span class="mark-v">◎</span></span></div></td>
+</tr>
+<tr>
+  <td class="num">3</td>
+  <td><a href="#v3" class="tname">ストップザシーズンインザサン（SSSSS）</a><span class="tgenre">自然派ワインのバル＋ラウンジ（2階）</span></td>
+  <td class="nowrap">520m・7分</td>
+  <td>着席43名・半貸切は20名〜相談</td>
+  <td>6,600〜7,330円（1,600〜2,330円超過）</td>
+  <td>〜23:30（2026年の営業を確認）</td>
+  <td>リクエスト予約（要電話）</td>
+  <td><div class="marks"><span class="mark m-weak"><span class="mark-k">距離</span><span class="mark-v">△</span></span><span class="mark m-best"><span class="mark-k">全員着席</span><span class="mark-v">◎</span></span><span class="mark m-weak"><span class="mark-k">個室・貸切</span><span class="mark-v">△</span></span><span class="mark m-weak"><span class="mark-k">予算</span><span class="mark-v">△</span></span><span class="mark m-best"><span class="mark-k">雰囲気</span><span class="mark-v">◎</span></span></div></td>
+</tr>
+<tr>
+  <td class="num">4</td>
+  <td><a href="#v4" class="tname">chill チル 原宿 表参道店</a><span class="tgenre">カフェ×肉バル（地下1階）</span></td>
+  <td class="nowrap">360m・5分</td>
+  <td>L字ソファー21名・20名〜貸切</td>
+  <td>4,500円（税込・2時間飲み放題付き）</td>
+  <td>〜23:00（ドリンクL.O.22:30）</td>
+  <td>Webで枠あり（電話で確認）</td>
+  <td><div class="marks"><span class="mark m-ok"><span class="mark-k">距離</span><span class="mark-v">○</span></span><span class="mark m-best"><span class="mark-k">全員着席</span><span class="mark-v">◎</span></span><span class="mark m-ok"><span class="mark-k">個室・貸切</span><span class="mark-v">○</span></span><span class="mark m-best"><span class="mark-k">予算</span><span class="mark-v">◎</span></span><span class="mark m-weak"><span class="mark-k">雰囲気</span><span class="mark-v">△</span></span></div></td>
+</tr>
+<tr>
+  <td class="num">5</td>
+  <td><a href="#v5" class="tname">ビストロコウ</a><span class="tgenre">ビストロ（扉付き個室あり）</span></td>
+  <td class="nowrap">276m・4分</td>
+  <td>個室13名まで・フロア貸切の上限が不明確</td>
+  <td>4,730円＋チャージ400円前後</td>
+  <td>〜23:00（Rettyは23:30）</td>
+  <td>要問い合わせ</td>
+  <td><div class="marks"><span class="mark m-best"><span class="mark-k">距離</span><span class="mark-v">◎</span></span><span class="mark m-weak"><span class="mark-k">全員着席</span><span class="mark-v">△</span></span><span class="mark m-weak"><span class="mark-k">個室・貸切</span><span class="mark-v">△</span></span><span class="mark m-ok"><span class="mark-k">予算</span><span class="mark-v">○</span></span><span class="mark m-weak"><span class="mark-k">雰囲気</span><span class="mark-v">△</span></span></div></td>
+</tr>
+<tr>
+  <td class="num">6</td>
+  <td><a href="#v6" class="tname">表参道プラネ</a><span class="tgenre">プラネタリウムバー（3階）</span></td>
+  <td class="nowrap">387m・5分</td>
+  <td>20〜40席・貸切可（横並び席中心）</td>
+  <td>要問い合わせ（予算表示3,000円台）</td>
+  <td>〜23:00か24:00（1.5時間制の可能性）</td>
+  <td>要問い合わせ</td>
+  <td><div class="marks"><span class="mark m-ok"><span class="mark-k">距離</span><span class="mark-v">○</span></span><span class="mark m-weak"><span class="mark-k">全員着席</span><span class="mark-v">△</span></span><span class="mark m-ok"><span class="mark-k">個室・貸切</span><span class="mark-v">○</span></span><span class="mark m-ask"><span class="mark-k">予算</span><span class="mark-v">？</span></span><span class="mark m-ok"><span class="mark-k">雰囲気</span><span class="mark-v">○</span></span></div></td>
+</tr>
+<tr>
+  <td class="num">7</td>
+  <td><a href="#v7" class="tname">LAVA LOUNGE</a><span class="tgenre">夜景のカクテルバー＋ラウンジ（10・11階）</span></td>
+  <td class="nowrap">481m・7分</td>
+  <td>席数不明・個室／貸切可</td>
+  <td>要問い合わせ</td>
+  <td>18:00〜翌2:00</td>
+  <td>要問い合わせ</td>
+  <td><div class="marks"><span class="mark m-weak"><span class="mark-k">距離</span><span class="mark-v">△</span></span><span class="mark m-ask"><span class="mark-k">全員着席</span><span class="mark-v">？</span></span><span class="mark m-ok"><span class="mark-k">個室・貸切</span><span class="mark-v">○</span></span><span class="mark m-ask"><span class="mark-k">予算</span><span class="mark-v">？</span></span><span class="mark m-ok"><span class="mark-k">雰囲気</span><span class="mark-v">○</span></span></div></td>
+</tr>
+<tr>
+  <td class="num">8</td>
+  <td><a href="#v8" class="tname">SHISHA HAVEN</a><span class="tgenre">シーシャラウンジ（5階）</span></td>
+  <td class="nowrap">234m・3分</td>
+  <td>48席・貸切は表記が矛盾</td>
+  <td>予算表示3,001〜4,000円（飲み放題なし）</td>
+  <td>〜翌0:00（営業継続は要確認）</td>
+  <td>要問い合わせ</td>
+  <td><div class="marks"><span class="mark m-best"><span class="mark-k">距離</span><span class="mark-v">◎</span></span><span class="mark m-ok"><span class="mark-k">全員着席</span><span class="mark-v">○</span></span><span class="mark m-weak"><span class="mark-k">個室・貸切</span><span class="mark-v">△</span></span><span class="mark m-ok"><span class="mark-k">予算</span><span class="mark-v">○</span></span><span class="mark m-weak"><span class="mark-k">雰囲気</span><span class="mark-v">△</span></span></div></td>
+</tr></tbody>
+      </table>
+    </div>
+    <p class="legend">一致の記号：◎ 十分に満たす　○ 満たす　△ 条件付き・一部のみ　× 満たさない　？ 要問い合わせ</p>
+  </section>
+
+  <section id="map-section" aria-labelledby="h-map">
+    <h2 id="h-map">位置関係</h2>
+    <div class="map-box"><svg viewBox="0 0 560 560" role="img" aria-labelledby="map-title map-desc" class="map"><title id="map-title">原宿しずると候補店の位置関係</title><desc id="map-desc">原宿しずるを中心に、直線200m・400m・600mの円と、候補店と駅の位置を示した略図。</desc><circle cx="280.0" cy="280.0" r="80.0" class="ring"/><text x="284.0" y="196.0" class="ring-label">直線200m</text><circle cx="280.0" cy="280.0" r="160.0" class="ring"/><text x="284.0" y="116.0" class="ring-label">直線400m</text><circle cx="280.0" cy="280.0" r="240.0" class="ring"/><text x="284.0" y="36.0" class="ring-label">直線600m</text><text x="540" y="26" class="north" text-anchor="end">↑ 北</text><rect x="101.8" y="231.4" width="10" height="10" class="station"/><text x="97.8" y="240.4" class="station-label" text-anchor="end">JR原宿駅</text><rect x="188.8" y="309.9" width="10" height="10" class="station"/><text x="202.8" y="332.9" class="station-label" text-anchor="start">明治神宮前駅</text><rect x="448.5" y="447.5" width="10" height="10" class="station"/><text x="462.5" y="456.5" class="station-label" text-anchor="start">表参道駅</text><circle cx="280.0" cy="280.0" r="7" class="origin"/><text x="291.0" y="285.0" class="origin-label">原宿しずる（一次会）</text><g class="pin top"><circle cx="292.1" cy="251.2" r="11"/><text x="292.1" y="255.2" text-anchor="middle">1</text></g><g class="pin top"><circle cx="320.7" cy="164.3" r="11"/><text x="320.7" y="168.3" text-anchor="middle">2</text></g><g class="pin top"><circle cx="139.6" cy="248.8" r="11"/><text x="139.6" y="252.8" text-anchor="middle">3</text></g><g class="pin"><circle cx="344.7" cy="164.3" r="11"/><text x="344.7" y="168.3" text-anchor="middle">4</text></g><g class="pin"><circle cx="301.5" cy="190.3" r="11"/><text x="301.5" y="194.3" text-anchor="middle">5</text></g><g class="pin"><circle cx="174.9" cy="334.9" r="11"/><text x="174.9" y="338.9" text-anchor="middle">6</text></g><g class="pin"><circle cx="158.9" cy="377.9" r="11"/><text x="158.9" y="381.9" text-anchor="middle">7</text></g><g class="pin"><circle cx="236.0" cy="252.1" r="11"/><text x="236.0" y="256.1" text-anchor="middle">8</text></g></svg>
+      <p class="map-note">直線距離の略図です。徒歩分数は、実際の道のりを80m＝1分で換算した表の値を見てください。番号はランキングの順位、塗りつぶしの印がおすすめ3店です。2位と4位は同じビル（3階と地下1階）です。</p>
+    </div>
+  </section>
+
+  <section id="details" aria-labelledby="h-details">
+    <h2 id="h-details">各店の詳細</h2>
+    <div class="venues">
+<article class="venue" id="v1">
+  <header class="venue-head">
+    <span class="rank">1</span>
+    <div>
+      <h3>cafe&amp;bar natural stance</h3>
+      <p class="venue-genre">地下のカフェバー（店舗貸切型） ・ 徒歩85m・2分</p>
+    </div>
+  </header>
+  <div class="pills"><span class="pill pill-accent">店舗貸切</span><span class="pill pill-ok">貸切時は禁煙可</span><span class="pill pill-warn">夜営業の現況は要確認</span><span class="pill pill-warn">現金のみ</span></div>
+  <dl class="facts-dl"><div><dt>1. 店名・住所</dt><dd>cafe&amp;bar natural stance<br>東京都渋谷区神宮前3-21-10 フィールドワンビルB1F</dd></div><div><dt>2. 原宿しずるから</dt><dd>道のり約85m・徒歩約2分。原宿しずるの目と鼻の先です。</dd></div><div><dt>3. 雰囲気・写真</dt><dd>地下1階に、シャンデリア、アンティーク調のソファーとテーブル、バーカウンター。打ちっぱなしのコンクリートで、席の間隔は広め（2023年の口コミ）。写真の撮影時期は不明です。</dd></div><div><dt>4. 営業時間・21時以降</dt><dd>掲載上は全日11:00〜23:00（ラストオーダー22:30）。ホットペッパーは「11:00〜16:00／16:01〜23:00」の2行表記（2021年更新）で、1行目だけ見ると昼営業のみに見えます。Rettyは11:00〜23:00（2026年10月更新）。木曜21〜23時は掲載上は利用できますが、2025〜2026年に夜営業していることを直接示す情報はなく、要問い合わせです。</dd></div><div><dt>5. 15〜20名の着席</dt><dd>掲載上は可能です。席数は媒体で40〜50席と幅があり（ホットペッパー45席・着席時50名、Retty40席、食べログ50席）、ソファー席だけで26席あります。</dd></div><div><dt>6. 個室・貸切</dt><dd>個室はありません。店舗貸切は可能ですが、最低額が「8万円以上」（2021年）と「10万円以上で少人数でも可」（2018年）で食い違います。最低人数も「20〜50名」「30名〜」「40名〜」と媒体で割れています。現在の条件は要問い合わせです。</dd></div><div><dt>7. 料金・飲み放題</dt><dd>2時間飲み放題2,000円、飲み放題付きコース3,000〜4,500円の掲載があります（今もあるかは要問い合わせ）。貸切の最低額を人数で割ると、8万円なら20名で4,000円・15名で約5,333円、10万円なら20名で5,000円・15名で約6,667円です。税・チャージは要問い合わせ。支払いは現金のみ（カード・電子マネー・QR決済は不可）。通常は全席喫煙可で、貸切時は禁煙にできます。</dd></div><div><dt>8. 12/17(木)の予約</dt><dd>要問い合わせ。ネット予約は受付停止中で、電話のみです。</dd></div><div><dt>9. 公式・予約・電話</dt><dd><div class="links"><a href="https://www.hotpepper.jp/strJ001192067/" rel="noopener">ホットペッパー</a><a href="https://www.hotpepper.jp/strJ001192067/photo/?PHG=appearance" rel="noopener">店内の写真</a><a href="https://retty.me/area/PRE13/ARE23/SUB2301/100000814781/" rel="noopener">Retty</a><span class="tel">TEL 03-3402-1855</span></div></dd></div></dl>
+  <div class="procon">
+    <div><h4>メリット</h4><ul><li>徒歩2分で移動が最短</li><li>シャンデリアとアンティークソファーの地下空間を店ごと借りられる</li><li>20名なら、貸切の最低額を人数で割っても1人4,000〜5,000円で予算内</li><li>貸切時は禁煙にできる</li></ul></div>
+    <div><h4>デメリット・未確認点</h4><ul><li>2025〜2026年の夜営業を示す情報がない（最初に電話で確認）</li><li>貸切額（8万円か10万円か）と最低人数の記載が媒体で割れる</li><li>15名だと1人約5,333〜6,667円に上がる</li><li>現金のみ。主な情報が2018〜2021年のもの</li></ul></div>
+  </div>
+  <div class="ask"><h4>電話で聞くこと</h4><ol><li>今も夜23時まで営業しているか。12/17(木)21:00〜23:00に15〜20名で使えるか</li><li>貸切の最低額は8万円か10万円か。税込か、飲食代に充当されるか、最低人数はあるか</li><li>2時間飲み放題2,000円や飲み放題付きコースは今もあるか、料理の注文条件</li><li>貸切時に禁煙にできるか</li><li>支払いは現金のみか。予約金とキャンセル規定</li></ol></div>
+</article>
+<article class="venue" id="v2">
+  <header class="venue-head">
+    <span class="rank">2</span>
+    <div>
+      <h3>Bar dAZE（バー デイズ）</h3>
+      <p class="venue-genre">隠れ家ジャズバー（ビル3階） ・ 徒歩360m・5分</p>
+    </div>
+  </header>
+  <div class="pills"><span class="pill pill-accent">隠れ家バー</span><span class="pill pill-ok">〜20名で貸切可</span><span class="pill pill-warn">2026年の営業は要確認</span><span class="pill pill-warn">全席喫煙可</span></div>
+  <dl class="facts-dl"><div><dt>1. 店名・住所</dt><dd>Bar dAZE（バー デイズ）<br>東京都渋谷区神宮前3-27-17 T&#x27;s-TWOビル3F</dd></div><div><dt>2. 原宿しずるから</dt><dd>道のり約360m・徒歩約5分。4位の chill と同じビルです（chill は地下1階）。</dd></div><div><dt>3. 雰囲気・写真</dt><dd>「路地のビル三階で分かりづらい立地の隠れ家バー」「店内は完全にバーのような雰囲気」「ソファー席でゆったりでき、窓が広い」（2016〜2020年の口コミ）。食べログでは「裏原宿のジャズバー」と紹介されています。</dd></div><div><dt>4. 営業時間・21時以降</dt><dd>Retty：火〜土19:00〜翌3:00、日・祝19:00〜翌1:00、月曜定休（2025年8月更新）。食べログには「月〜土11:40〜翌2:00」とする情報と空欄の情報があります。どの値でも木曜21〜23時は営業時間内です。ただし最新の口コミが2025年8月で、2026年も営業しているかは要問い合わせです。</dd></div><div><dt>5. 15〜20名の着席</dt><dd>食べログ25席（カウンター9・テーブル6・ソファー10）、Retty21席。食べログの内訳なら、テーブルとソファーで16席あり、15〜16名は収まります。20名だとカウンターを4席以上使う計算です。全員が座れる配置かは要問い合わせ。</dd></div><div><dt>6. 個室・貸切</dt><dd>個室はありません。貸切可（〜20名、20〜50名）と掲載されています（食べログ、検索結果の要約）。最低人数・最低額は要問い合わせです。</dd></div><div><dt>7. 料金・飲み放題</dt><dd>予算表示は3,000〜3,999円、バータイムのテーブルチャージ700円（食べログ、検索結果の要約）。飲み放題やドリンク中心のプランはどの媒体にも記載がなく、要問い合わせです。Amex・PayPay可（Retty）。全席喫煙可。</dd></div><div><dt>8. 12/17(木)の予約</dt><dd>要問い合わせ。Web予約ページはありません。</dd></div><div><dt>9. 公式・予約・電話</dt><dd><div class="links"><a href="https://retty.me/area/PRE13/ARE23/SUB2301/100000726567/" rel="noopener">Retty</a><a href="https://retty.me/area/PRE13/ARE23/SUB2301/100000726567/photos/?kind=3" rel="noopener">店内の写真（Retty）</a><a href="https://tabelog.com/tokyo/A1306/A130601/13026296/" rel="noopener">食べログ</a><span class="tel">TEL 03-5412-0938</span></div></dd></div></dl>
+  <div class="procon">
+    <div><h4>メリット</h4><ul><li>路地裏ビルの3階にある、条件の言葉に最も近い隠れ家バー</li><li>ソファー10席。15〜16名ならテーブルとソファーに全員座れる計算</li><li>〜20名の貸切可と掲載</li><li>深夜まで営業していて、一次会が押しても余裕がある</li></ul></div>
+    <div><h4>デメリット・未確認点</h4><ul><li>最新情報が2025年8月で、2026年も営業しているか未確認</li><li>席数が21席か25席かで割れ、20名だとカウンター併用</li><li>飲み放題などのプラン情報がない</li><li>全席喫煙可（貸切時の扱いは要確認）</li></ul></div>
+  </div>
+  <div class="ask"><h4>電話で聞くこと</h4><ol><li>現在も営業しているか。木曜の営業時間（19:00〜翌3:00で合っているか）</li><li>12/17(木)21:00〜23:00に15〜20名で貸切できるか。最低人数・最低額、チャージ700円は貸切でもかかるか</li><li>席数（21か25か）と、20名全員が座れる配置にできるか</li><li>飲み放題やドリンク中心のプランと、1人あたりの目安</li><li>貸切時に禁煙にできるか</li></ol></div>
+</article>
+<article class="venue" id="v3">
+  <header class="venue-head">
+    <span class="rank">3</span>
+    <div>
+      <h3>ストップザシーズンインザサン（SSSSS）</h3>
+      <p class="venue-genre">自然派ワインのバル＋ラウンジ（2階） ・ 徒歩520m・7分</p>
+    </div>
+  </header>
+  <div class="pills"><span class="pill pill-ok">2026年の営業を確認</span><span class="pill pill-ok">全席禁煙</span><span class="pill pill-neutral">半貸切は20名〜相談</span><span class="pill pill-warn">予算を1,600円〜超過</span></div>
+  <dl class="facts-dl"><div><dt>1. 店名・住所</dt><dd>ストップザシーズンインザサン（SSSSS）<br>東京都渋谷区神宮前1-14-21 バルビゾン80 2F</dd></div><div><dt>2. 原宿しずるから</dt><dd>道のり約520m・徒歩約7分（ホットペッパーの地図の位置だと543m）。Hohokam DINER が入る建物の2階で、黄色い看板が目印です。</dd></div><div><dt>3. 雰囲気・写真</dt><dd>温かみのある間接照明と観葉植物、ビリジアンカラーのバーカウンター、ソファーのラウンジ。自然派ワインは50種。ホットペッパーの口コミ集計は「落ち着いた」寄りです。一方で、立ち飲みカウンターや週末のDJもあります。2026年1月にFASHIONSNAPで紹介されました。</dd></div><div><dt>4. 営業時間・21時以降</dt><dd>月〜日・祝15:00〜23:30（料理ラストオーダー22:30、ドリンク23:00）。ホットペッパーは2026年11月更新で、今も営業していることを確認できました。定休日はホットペッパー「なし」、Retty「月曜」と割れますが、木曜には影響しません。</dd></div><div><dt>5. 15〜20名の着席</dt><dd>55席（立ち飲み含む）で、着席なら最大43名（ホットペッパー）。Rettyは41席。15〜20名が座れる広さです。</dd></div><div><dt>6. 個室・貸切</dt><dd>個室はありません。貸切プランは平日最低40名からです（8,000円プランは30名からとの記載もあり）。「半貸切20名〜ご相談」の記載があります。15〜19名で半貸切できるか、最低額は要問い合わせです。</dd></div><div><dt>7. 料金・飲み放題</dt><dd>6,600円コース（税込、2時間フリードリンク、8品、3名以上でラウンジチャージ無料）で、予算上限を1,600円超えます。ネット予約は2〜12名用です。半貸切で貸切6,000円プランにラウンジ使用料1,000円とお通し330円が加わると7,330円（2,330円超過、掲載額からの試算）。フリードリンクにワインの記載はありません。支払いはキャッシュレスのみ（Retty）。全席禁煙です。</dd></div><div><dt>8. 12/17(木)の予約</dt><dd>要問い合わせ。ホットペッパーの空席カレンダーで12/17は「□（リクエスト予約）」、21:00・15名／20名でネット予約できるコースはありませんでした（11月20日未明に確認）。</dd></div><div><dt>9. 公式・予約・電話</dt><dd><div class="links"><a href="https://www.hotpepper.jp/strJ003715022/" rel="noopener">ホットペッパー</a><a href="https://www.hotpepper.jp/strJ003715022/photo/?PHG=appearance" rel="noopener">店内の写真</a><a href="https://www.hotpepper.jp/strJ003715022/yoyaku/" rel="noopener">予約ページ</a><a href="https://retty.me/area/PRE13/ARE23/SUB2301/100001709132/" rel="noopener">Retty</a><span class="tel">TEL 03-4400-2242</span></div></dd></div></dl>
+  <div class="procon">
+    <div><h4>メリット</h4><ul><li>2026年11月の掲載更新で、今も営業していることを確認できている</li><li>間接照明・観葉植物・ソファーのラウンジで、雰囲気は候補中もっとも洗練</li><li>着席43名まで入る広さで、全席禁煙</li><li>23:30まで営業</li></ul></div>
+    <div><h4>デメリット・未確認点</h4><ul><li>徒歩7分で、5分圏の外</li><li>1人6,600〜7,330円で、予算上限を1,600〜2,330円超える</li><li>半貸切は「20名〜相談」で、15〜19名は未確定。他の客と同じフロアになる可能性</li><li>週末はDJあり（木曜の音量は要確認）。キャッシュレスのみ</li></ul></div>
+  </div>
+  <div class="ask"><h4>電話で聞くこと</h4><ol><li>12/17(木)21:00〜23:00に15〜20名でラウンジフロアの半貸切ができるか（15名でも可か）</li><li>6,600円コースを13名以上で使えるか。ラウンジ使用料1,000円とお通し330円は加算されるか</li><li>飲み放題＋軽いおつまみ中心の半貸切プランの価格。月〜木10%引きクーポンと併用できるか</li><li>他の客との区切り方、木曜夜のDJの有無と音量</li><li>支払い方法（キャッシュレスのみか）、予約の締切と取消料</li></ol></div>
+</article>
+<article class="venue" id="v4">
+  <header class="venue-head">
+    <span class="rank">4</span>
+    <div>
+      <h3>chill チル 原宿 表参道店</h3>
+      <p class="venue-genre">カフェ×肉バル（地下1階） ・ 徒歩360m・5分</p>
+    </div>
+  </header>
+  <div class="pills"><span class="pill pill-ok">12/17の枠がWebに表示</span><span class="pill pill-ok">4,500円・税込</span><span class="pill pill-ok">全席禁煙</span><span class="pill pill-warn">雰囲気はカジュアル</span></div>
+  <dl class="facts-dl"><div><dt>1. 店名・住所</dt><dd>chill チル 原宿 表参道店<br>東京都渋谷区神宮前3-27-17 Ts-TwoビルB1F</dd></div><div><dt>2. 原宿しずるから</dt><dd>道のり約360m・徒歩約5分。2位の Bar dAZE と同じビルです。</dd></div><div><dt>3. 雰囲気・写真</dt><dd>「おしゃれなカフェ居酒屋と肉バルのコラボ」。隠し扉の個室と、最大21名が座れるL字型ソファー席があります。口コミ集計は普段使い寄りで、バーらしさは上位3店に劣ります。</dd></div><div><dt>4. 営業時間・21時以降</dt><dd>月〜日・祝17:00〜23:00（料理ラストオーダー22:00、ドリンク22:30）、定休日なし（ホットペッパー2026年11月更新）。21時以降の入店は「1ドリンク1品以上」の注文が条件です。</dd></div><div><dt>5. 15〜20名の着席</dt><dd>45〜50席。非個室のオープンラウンジにL字ソファー（最大21名）があり、15〜20名がまとまって座れます。</dd></div><div><dt>6. 個室・貸切</dt><dd>個室は最大10名で、15名以上は入りません。貸切は20名から（上限は媒体により36〜50名）。貸切料の金額は要問い合わせ。貸切のキャンセル料は「1ヶ月前から100%」で、すでにその期間に入っています。15〜19名ならL字ソファー（非個室）で、仕切れるかは要問い合わせです。</dd></div><div><dt>7. 料金・飲み放題</dt><dd>【1日3組限定】2時間飲み放題付きコース4,500円（税込、6品、ドリンク約50種）。ドリンク中心なら「2時間飲み放題2,000円」のクーポン（1日3組・1人2品以上の注文が条件）がありますが、店舗情報の「2,500円」と食い違います。12月は予約状況によりコースのみの受付になる場合があります（Retty）。全席禁煙です。</dd></div><div><dt>8. 12/17(木)の予約</dt><dd>Webで予約枠を確認できました。ホットペッパーの空席カレンダーで12/17は「◎」、21:00・15名／20名の条件で4,500円コースと席のみの予約が可能と表示されました（11月20日未明に確認）。ただし、L字ソファーや貸切の指定までは確認できておらず、Web予約がそのまま確定とは限りません。</dd></div><div><dt>9. 公式・予約・電話</dt><dd><div class="links"><a href="https://www.hotpepper.jp/strJ001210835/" rel="noopener">ホットペッパー</a><a href="https://www.hotpepper.jp/strJ001210835/photo/?PHG=appearance" rel="noopener">店内の写真</a><a href="https://www.hotpepper.jp/strJ001210835/course/?RDT=20261217&amp;RPN=20&amp;RTM=2100" rel="noopener">12/17 21:00・20名のプラン</a><a href="https://www.hotpepper.jp/strJ001210835/yoyaku/" rel="noopener">予約ページ</a><span class="tel">TEL 03-5843-1767</span></div></dd></div></dl>
+  <div class="procon">
+    <div><h4>メリット</h4><ul><li>12/17 21:00の15名・20名の枠がWebに出た唯一の店</li><li>2時間飲み放題付き4,500円（税込）で予算内</li><li>最大21名のL字ソファーにまとまって座れる</li><li>全席禁煙。2026年11月に掲載が更新されている</li></ul></div>
+    <div><h4>デメリット・未確認点</h4><ul><li>「カフェ居酒屋×肉バル」で、バーらしい落ち着きは弱い</li><li>15〜19名は非個室のソファー席になる</li><li>貸切料の金額が不明。貸切のキャンセル料はすでに100%の期間</li><li>4,500円コースは1日3組限定</li></ul></div>
+  </div>
+  <div class="ask"><h4>電話で聞くこと</h4><ol><li>15〜19名でL字ソファーを指定できるか、衝立などで仕切れるか</li><li>20名で貸切にする場合の貸切料と、21:00から2時間の貸切が可能か</li><li>飲み放題2,000円（クーポン）と2,500円の関係、税込か、お通しの額、12月もクーポンが使えるか</li><li>4,500円コースの12/17の残り枠と、Web予約が確定扱いになるか</li><li>キャンセル規定（ページ内で記載が割れている）</li></ol></div>
+</article>
+<article class="venue" id="v5">
+  <header class="venue-head">
+    <span class="rank">5</span>
+    <div>
+      <h3>ビストロコウ</h3>
+      <p class="venue-genre">ビストロ（扉付き個室あり） ・ 徒歩276m・4分</p>
+    </div>
+  </header>
+  <div class="pills"><span class="pill pill-ok">2026年の営業を確認</span><span class="pill pill-warn">個室は13名まで</span><span class="pill pill-warn">全席喫煙可</span></div>
+  <dl class="facts-dl"><div><dt>1. 店名・住所</dt><dd>ビストロコウ<br>東京都渋谷区神宮前3-25-7</dd></div><div><dt>2. 原宿しずるから</dt><dd>道のり約276m・徒歩約4分。</dd></div><div><dt>3. 雰囲気・写真</dt><dd>「落ち着いた大人の原宿」のビストロ。キッチンを望むテーブル席と、扉付きの完全防音個室があります。設備欄に「カラオケ設備あり」。</dd></div><div><dt>4. 営業時間・21時以降</dt><dd>ホットペッパー：月〜土17:30〜23:00（ドリンクラストオーダー22:30）、日曜定休（2025年9月更新）。Retty：月〜土・祝17:00〜23:30（2026年4月更新）。木曜21〜23時はどちらでも利用できます。</dd></div><div><dt>5. 15〜20名の着席</dt><dd>26〜30席（媒体で異なる）。15〜20名が全員座るにはフロア貸切が前提です。</dd></div><div><dt>6. 個室・貸切</dt><dd>完全個室は最大13名（媒体により8名・10名とも）で、15名以上は入りません。フロア貸切は「10名様位で可」（ホットペッパー）と「最大20名」（食べログ、検索結果の要約）で割れています。最低額は要問い合わせです。</dd></div><div><dt>7. 料金・飲み放題</dt><dd>2時間飲み放題付きコース4,730円（税込、5品）。チャージ400〜440円が加わると5,130〜5,170円（130〜170円超過）。飲み放題のみのプランは要問い合わせ。全席喫煙可です。</dd></div><div><dt>8. 12/17(木)の予約</dt><dd>要問い合わせ。ネット予約は受付停止中です。</dd></div><div><dt>9. 公式・予約・電話</dt><dd><div class="links"><a href="https://www.hotpepper.jp/strJ001209535/" rel="noopener">ホットペッパー</a><a href="https://www.hotpepper.jp/strJ001209535/photo/?PHG=appearance" rel="noopener">店内の写真</a><a href="https://retty.me/area/PRE13/ARE23/SUB2301/100001474716/" rel="noopener">Retty</a><span class="tel">TEL 03-3401-3795（食べログ掲載は050-5456-7105）</span></div></dd></div></dl>
+  <div class="procon">
+    <div><h4>メリット</h4><ul><li>徒歩4分</li><li>扉付きの完全防音個室がある</li><li>2026年の営業を確認できている</li><li>飲み放題付き4,730円で、ほぼ予算内</li></ul></div>
+    <div><h4>デメリット・未確認点</h4><ul><li>個室は最大13名で、15名以上はフロア貸切が前提</li><li>フロア貸切の上限が「10名位」と「20名」で割れている</li><li>全席喫煙可・カラオケ設備あり</li><li>昼は店主ひとりで営業との口コミ（夜の体制は要確認）</li></ul></div>
+  </div>
+  <div class="ask"><h4>電話で聞くこと</h4><ol><li>12/17(木)21:00〜23:00に15〜20名でフロア貸切ができるか。最大・最低人数と最低額</li><li>夜は何人体制か、20名分に対応できるか</li><li>2時間飲み放題＋軽食のプランがあるか、4,730円コースにチャージ400円が加わるか</li><li>貸切時の禁煙と、カラオケ設備の扱い</li></ol></div>
+</article>
+<article class="venue" id="v6">
+  <header class="venue-head">
+    <span class="rank">6</span>
+    <div>
+      <h3>表参道プラネ</h3>
+      <p class="venue-genre">プラネタリウムバー（3階） ・ 徒歩387m・5分</p>
+    </div>
+  </header>
+  <div class="pills"><span class="pill pill-ok">貸切可</span><span class="pill pill-warn">食べログで「掲載保留」</span><span class="pill pill-warn">開業時は1.5時間制</span></div>
+  <dl class="facts-dl"><div><dt>1. 店名・住所</dt><dd>表参道プラネ<br>東京都渋谷区神宮前6-32-1 3F</dd></div><div><dt>2. 原宿しずるから</dt><dd>道のり約387m・徒歩約5分。</dd></div><div><dt>3. 雰囲気・写真</dt><dd>天井にプラネタリウムを投影する真っ暗なバー。暗幕の入口、浴衣のスタッフ、12星座のカクテル。「周りの客が見えず、席がプライベートな空間になる」（2025年11月の口コミ）。席は横並びのソファーとペアシートが中心で、デート向けの打ち出しです。</dd></div><div><dt>4. 営業時間・21時以降</dt><dd>開業時（2025年8月）は19:00〜24:00で、滞在1.5時間制。食べログは18:00〜23:00。どの値でも木曜21〜23時は営業時間内ですが、2時間使えるかは要問い合わせです。</dd></div><div><dt>5. 15〜20名の着席</dt><dd>40席とする情報と20席とする情報があります。横並び・ペアシート中心で、全員が向き合って話せる配置かは要問い合わせです。</dd></div><div><dt>6. 個室・貸切</dt><dd>貸切可（20名以下、20〜50名）。貸切の問い合わせはメール（食べログ掲載：planetarium.harajuku@gmail.com）。最低人数・最低額は要問い合わせです。</dd></div><div><dt>7. 料金・飲み放題</dt><dd>チャージが「なし／1,000円／1,300円」と媒体で異なります。口コミ集計の予算は3,000〜3,999円。支払いも「現金のみ」「PayPay可」で食い違います。団体プランは要問い合わせです。</dd></div><div><dt>8. 12/17(木)の予約</dt><dd>要問い合わせ。</dd></div><div><dt>9. 公式・予約・電話</dt><dd><div class="links"><a href="https://retty.me/area/PRE13/ARE23/SUB2301/100001804890/" rel="noopener">Retty</a><a href="https://tabelog.com/tokyo/A1306/A130601/13312832/" rel="noopener">食べログ</a><a href="https://prtimes.jp/main/html/rd/p/000000027.000062473.html" rel="noopener">開業時のプレスリリース（写真あり）</a><span class="tel">TEL 080-3496-6072</span></div></dd></div></dl>
+  <div class="procon">
+    <div><h4>メリット</h4><ul><li>暗い星空の空間で、周りの客が見えにくい</li><li>徒歩5分で、貸切可と掲載</li><li>ほかにない体験で話題になる</li></ul></div>
+    <div><h4>デメリット・未確認点</h4><ul><li>食べログで「掲載保留」（営業状況が確認できない）と表示</li><li>横並び・ペアシート中心で、全員で話す配置に向かない</li><li>開業時は滞在1.5時間制</li><li>チャージと支払い方法の記載が媒体で一致しない</li></ul></div>
+  </div>
+  <div class="ask"><h4>電話で聞くこと</h4><ol><li>現在も営業しているか（食べログ「掲載保留」の理由）</li><li>木曜の営業時間と1.5時間制の扱い。貸切なら2時間使えるか</li><li>席数（40か20か）と、15〜20名が向き合って話せる配置にできるか</li><li>チャージ、支払い方法、貸切の最低額とドリンクプラン</li></ol></div>
+</article>
+<article class="venue" id="v7">
+  <header class="venue-head">
+    <span class="rank">7</span>
+    <div>
+      <h3>LAVA LOUNGE</h3>
+      <p class="venue-genre">夜景のカクテルバー＋ラウンジ（10・11階） ・ 徒歩481m・7分</p>
+    </div>
+  </header>
+  <div class="pills"><span class="pill pill-accent">夜景</span><span class="pill pill-ok">個室・貸切可</span><span class="pill pill-warn">席数・料金は非公開</span><span class="pill pill-warn">深夜はDJ営業</span></div>
+  <dl class="facts-dl"><div><dt>1. 店名・住所</dt><dd>LAVA LOUNGE<br>東京都渋谷区神宮前6-28-6 キュープラザ原宿10F・11F</dd></div><div><dt>2. 原宿しずるから</dt><dd>道のり約481m・徒歩約7分。</dd></div><div><dt>3. 雰囲気・写真</dt><dd>洗練されたカクテルバーとクラブラウンジを合わせた空間で、東京の夜景を望めます。夜が更けるとDJのクラブ営業に切り替わります。</dd></div><div><dt>4. 営業時間・21時以降</dt><dd>火〜日18:00〜翌2:00、月曜定休（食べログ、検索結果の要約）。木曜21〜23時は利用できます。DJ営業が何時から始まるかは要問い合わせです。</dd></div><div><dt>5. 15〜20名の着席</dt><dd>席数の記載がなく、要問い合わせです。</dd></div><div><dt>6. 個室・貸切</dt><dd>「個室あり」「貸切可」と掲載されています。定員・最低人数・最低額は要問い合わせです。</dd></div><div><dt>7. 料金・飲み放題</dt><dd>予算・チャージ・飲み放題の記載がなく、要問い合わせです。カード・電子マネー可。</dd></div><div><dt>8. 12/17(木)の予約</dt><dd>要問い合わせ。</dd></div><div><dt>9. 公式・予約・電話</dt><dd><div class="links"><a href="https://tabelog.com/tokyo/A1306/A130601/13300295/" rel="noopener">食べログ</a><a href="https://www.nightlifetokyo.com/venues/lavalounge" rel="noopener">Nightlife Tokyo（写真）</a><span class="tel">TEL 080-9438-7825（「電話受付は停止中」との注記あり）</span></div></dd></div></dl>
+  <div class="procon">
+    <div><h4>メリット</h4><ul><li>最上階の夜景ラウンジで特別感がある</li><li>個室・貸切可と掲載</li><li>翌2時まで営業</li></ul></div>
+    <div><h4>デメリット・未確認点</h4><ul><li>席数・料金・プランの公開情報がない</li><li>夜が更けるとクラブ営業になり、会話中心の会に合わないおそれ</li><li>電話受付が停止中との注記</li><li>徒歩7分</li></ul></div>
+  </div>
+  <div class="ask"><h4>電話で聞くこと</h4><ol><li>電話受付は再開しているか（停止中なら連絡方法）</li><li>席数、個室の定員、貸切の最低人数・最低額</li><li>木曜21〜23時の音量と、DJ営業が始まる時刻</li><li>飲み放題・ドリンクプランと1人あたりの目安</li></ol></div>
+</article>
+<article class="venue" id="v8">
+  <header class="venue-head">
+    <span class="rank">8</span>
+    <div>
+      <h3>SHISHA HAVEN</h3>
+      <p class="venue-genre">シーシャラウンジ（5階） ・ 徒歩234m・3分</p>
+    </div>
+  </header>
+  <div class="pills"><span class="pill pill-ok">徒歩3分・48席</span><span class="pill pill-warn">飲み放題なし</span><span class="pill pill-warn">シーシャ・喫煙前提</span><span class="pill pill-warn">貸切の表記が矛盾</span></div>
+  <dl class="facts-dl"><div><dt>1. 店名・住所</dt><dd>SHISHA HAVEN<br>東京都渋谷区神宮前1-8-8 coxy188ビル5F</dd></div><div><dt>2. 原宿しずるから</dt><dd>道のり約234m・徒歩約3分。</dd></div><div><dt>3. 雰囲気・写真</dt><dd>「アラビアン×ゴージャス」。遊牧民ベドウィンの様式をお手本にしたエキゾチックな内装で、座敷・ソファー・カウンター、夜景の見える席があります。</dd></div><div><dt>4. 営業時間・21時以降</dt><dd>月〜日13:00〜翌0:00（ラストオーダー23:30）、定休日なし（2025年7月更新）。2026年も営業しているかの根拠はなく、要問い合わせです。</dd></div><div><dt>5. 15〜20名の着席</dt><dd>48席・最大宴会60名、個室なし。15〜20名を一角にまとめられるかは要問い合わせです。</dd></div><div><dt>6. 個室・貸切</dt><dd>情報表は「貸切不可」、宣伝文は「団体、貸切も可能」と矛盾しています。要問い合わせです。</dd></div><div><dt>7. 料金・飲み放題</dt><dd>飲み放題はありません。ドリンク600〜1,300円、シーシャ3,000円、シェアチャージ1,000円（1人単位か1台単位かは要問い合わせ）。フードはアイスクリームのみ。予算表示3,001〜4,000円。全席喫煙可（加熱式たばこ）で、シーシャの煙もあります。</dd></div><div><dt>8. 12/17(木)の予約</dt><dd>要問い合わせ。ネット予約は受付停止中です。</dd></div><div><dt>9. 公式・予約・電話</dt><dd><div class="links"><a href="https://www.hotpepper.jp/strJ004402657/" rel="noopener">ホットペッパー</a><a href="https://www.hotpepper.jp/strJ004402657/photo/?PHG=appearance" rel="noopener">店内の写真</a><span class="tel">TEL 070-6467-2424</span></div></dd></div></dl>
+  <div class="procon">
+    <div><h4>メリット</h4><ul><li>徒歩3分・48席の広さ</li><li>座敷とソファーでくつろげる。夜景の見える席もある</li><li>翌0時まで営業</li></ul></div>
+    <div><h4>デメリット・未確認点</h4><ul><li>シーシャの煙と喫煙が前提で、吸わない人には向かない</li><li>飲み放題がない</li><li>貸切「不可」と「可能」の表記が矛盾</li><li>情報が2025年7月で止まり、Web予約も停止中</li></ul></div>
+  </div>
+  <div class="ask"><h4>電話で聞くこと</h4><ol><li>現在も営業しているか</li><li>15〜20名で貸切、または一角の確保ができるか</li><li>シェアチャージ1,000円は1人単位か1台単位か、吸わない人にもかかるか</li><li>飲み放題が本当にないか</li></ol></div>
+</article></div>
+  </section>
+
+  <section id="decide" aria-labelledby="h-decide">
+    <h2 id="h-decide">電話の結果で決める</h2>
+    <div class="table-wrap">
+      <table class="plain-table">
+        <thead><tr><th>電話で分かったこと</th><th>次の一手</th><th>1人あたりの目安</th></tr></thead>
+        <tbody><tr><td>natural stance が今も夜に営業し、21〜23時の貸切を受けてくれる</td><td>本命として予約。貸切時の禁煙指定と、現金での事前集金を準備する</td><td>20名で4,000〜5,000円、15名で約5,333〜6,667円</td></tr><tr><td>natural stance はだめ、Bar dAZE が営業中で貸切できる</td><td>15〜16名ならテーブルとソファーで全員着席。20名ならカウンター併用になることを参加者に伝えて予約</td><td>要問い合わせ（予算表示3,000〜3,999円＋チャージ700円）</td></tr><tr><td>上の2店ともだめ、または喫煙の扱いが合わない</td><td>SSSSS にラウンジの半貸切を相談</td><td>6,600〜7,330円（1,600〜2,330円超過）</td></tr><tr><td>SSSSS も15〜19名の半貸切を受けない</td><td>chill の4,500円コースで確定し、L字ソファーを指定（20名なら貸切も相談）</td><td>4,500円（税込）</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="schedule" aria-labelledby="h-schedule">
+    <h2 id="h-schedule">予約までの段取り</h2>
+    <ol class="schedule"><li><span class="sch-date">11月20日(金)〜21日(土)</span><span class="sch-todo">上位4店へ電話。開店時刻に合わせて natural stance（11時〜）→ SSSSS（15時〜）→ chill（17時〜）→ Bar dAZE（19時〜）の順に回れば1日で終わります。各店で「仮押さえの可否と期限」も聞く。</span><span class="sch-note">Bar dAZE はRetty上では月曜定休</span></li><li><span class="sch-date">11月24日(火)ごろ</span><span class="sch-todo">回答を比べて1店に決め、総額（税・サービス料・チャージ込み）、21:00〜23:00の時間、席の配置、禁煙、支払い方法、キャンセル規定をメールやSMSでもらう。決めたら他店の仮押さえはすぐ解除。</span><span class="sch-note">媒体どうしの食い違いが多いので、口頭の回答だけで確定しない</span></li><li><span class="sch-date">12月6日(日)</span><span class="sch-todo">chill のコース予約を保険にした場合、要否を判断する期限。</span><span class="sch-note">最も厳しい記載（10日前から50%）に合わせた日付</span></li><li><span class="sch-date">12月9日(水)</span><span class="sch-todo">最終人数を確定して店に伝える。</span><span class="sch-note">chill は7日前（12月10日）から席のみの予約でも1人3,000円の取消料</span></li><li><span class="sch-date">12月14日(月)</span><span class="sch-todo">SSSSS をWebのリクエスト予約で進める場合の締切（来店3日前）。</span><span class="sch-note">SSSSS の貸切プランは前日80%・当日100%の取消料</span></li><li><span class="sch-date">12月16日(水)</span><span class="sch-todo">人数と到着時刻を最終連絡。</span><span class="sch-note"></span></li><li><span class="sch-date">12月17日(木)</span><span class="sch-todo">一次会が終わったらすぐ移動。SSSSS なら「Hohokam DINER が入る建物の2階・黄色い看板」を参加者に共有。</span><span class="sch-note">natural stance・chill は23:00閉店なので、一次会が押すと飲める時間がそのまま減る</span></li></ol>
+  </section>
+
+  <section id="checklist" aria-labelledby="h-check">
+    <h2 id="h-check">予約するときに必ず確認すること</h2>
+    <ol class="check"><li><span class="ck-title">1人あたりの総額</span><span class="ck-detail">税・サービス料・チャージ・お通しを全部含めた金額で聞く。貸切の場合は最低額と、それが飲食代に充当されるか。</span></li><li><span class="ck-title">21:00〜23:00の2時間で使えるか</span><span class="ck-detail">ラストオーダーの時刻、時間制（1.5時間制など）、12月だけの特別ルール（コース限定・時間制）があるか。</span></li><li><span class="ck-title">15〜20名が全員座れる配置か</span><span class="ck-detail">カウンター併用になるか、ソファーやテーブルでまとまれるか。15名の場合と20名の場合の両方を聞く。</span></li><li><span class="ck-title">貸切・半貸切の条件</span><span class="ck-detail">最低人数と最低額。15名でも受けてもらえるか。半貸切なら他の客との区切り方と音量（DJの有無）。</span></li><li><span class="ck-title">喫煙の扱い</span><span class="ck-detail">全席喫煙可の店が多いので、貸切時に禁煙にできるかを予約条件に入れる。</span></li><li><span class="ck-title">支払い方法</span><span class="ck-detail">natural stance は現金のみ、SSSSS はキャッシュレスのみの記載あり。集金方法を先に決める。</span></li><li><span class="ck-title">予約金・キャンセル規定・人数確定の期限</span><span class="ck-detail">12月の団体予約は取消料が早めにかかることが多い。人数の増減をいつまで受けてもらえるか。</span></li><li><span class="ck-title">仮押さえと書面確認</span><span class="ck-detail">仮押さえの可否と期限を聞き、決めた条件はメールやSMSで残してもらう。媒体どうしの食い違いは「どちらが今の条件か」を聞くと早い。</span></li></ol>
+  </section>
+
+  <section id="about" aria-labelledby="h-about">
+    <h2 id="h-about">調査について</h2>
+    <ul class="notes"><li>調査日：2026年11月19日（日本時間11月20日未明）。料金・営業時間・予約状況は変わることがあります。予約前に必ずお店に確認してください。</li><li>ホットペッパーとRettyは店舗ページを直接見て確認しました。食べログ・ぐるなび・ヒトサラなどは直接見られなかったため、検索結果の要約に基づく情報です（各店の欄に記載）。食べログだけに載っている小さな店は漏れている可能性があります。</li><li>徒歩距離は、国土地理院の住所検索で座標を出し、OpenStreetMapをもとにした徒歩ルートで道のりを計算して、80m＝1分で切り上げました。同じ方法で原宿しずる→JR原宿駅は約605m・8分です。</li><li>確認できなかった項目は「要問い合わせ」としています。媒体どうしで食い違う値は両方を載せています。</li><li>Web上の空席表示（◎など）は通常のネット予約枠の空きで、15〜20名の団体や貸切を保証するものではありません。</li><li>写真の撮影時期は不明です。今の内装と同じかはお店に確認してください。</li></ul>
+    <h3 class="sub">検討したが外した店</h3>
+    <div class="table-wrap">
+      <table class="plain-table">
+        <thead><tr><th>店名</th><th>徒歩</th><th>外した理由</th></tr></thead>
+        <tbody><tr><td>チョウチン 原宿・表参道店</td><td class="nowrap">130m・2分</td><td>貸切20〜56名・2時間飲み放題付き4,500円と条件は合うが、自ら「ちょっとお洒落な大衆居酒屋」と紹介している</td></tr><tr><td>Cigar Bar Chardonnay</td><td class="nowrap">155m・2分</td><td>地下の葉巻バーだが、グループ利用は4名まで</td></tr><tr><td>The Restaurant Base omotesando</td><td class="nowrap">176m・3分</td><td>バー風のレンタルスペースだが、着席は16名まで。スタッフのいない持ち込み型</td></tr><tr><td>ロックバー ハーフムーン</td><td class="nowrap">212m・3分</td><td>24席・貸切不可・全席喫煙可</td></tr><tr><td>cafe STUDIO</td><td class="nowrap">232m・3分</td><td>80席だが通常21:00閉店。貸切は50名〜（平日の最低額22万円との情報も）</td></tr><tr><td>神宮前食堂 サンハウス</td><td class="nowrap">277m・4分</td><td>12/17の枠と飲み放題のみ2,200円はあるが、明るい店内でテレビあり、全席喫煙可。貸切は基本40名以上</td></tr><tr><td>ALA</td><td class="nowrap">277m・4分</td><td>大人の隠れ家イタリアンだが、貸切は30名〜で、ドリンクのラストオーダー22:00</td></tr><tr><td>BEVE</td><td class="nowrap">314m・4分</td><td>カラオケ・スポーツ観戦系のバーで20席。貸切の表記が矛盾</td></tr><tr><td>ベアードタップルーム原宿</td><td class="nowrap">504m・7分</td><td>20名からフロア貸切できるが、ドリンクのラストオーダーが22:00で居酒屋寄り</td></tr><tr><td>Lotus</td><td class="nowrap">533m・7分</td><td>100席のカフェラウンジだが、閉店時刻が媒体で割れ、貸切情報なし</td></tr><tr><td>ルシェルブラン表参道</td><td class="nowrap">548m・7分</td><td>貸切カフェで20名着席・1時間33,000円。夜に使えるかとドリンクの手配が不明</td></tr><tr><td>The Standard</td><td class="nowrap">642m・9分</td><td>隠れ家カクテルバーで貸切可だが、日曜のみの営業に変更。12/17は休み</td></tr><tr><td>MERCER CAFE TOP GARDEN（10分超）</td><td class="nowrap">891m・12分</td><td>平日20名〜貸切・飲み放題コース5,000〜6,000円の掲載だが、10分を超え、情報は2020年のもの</td></tr><tr><td>246Lounge（10分超）</td><td class="nowrap">983m・13分</td><td>個室10〜20名・貸切20〜50名と条件は最適だが、10分を超え、予算は6,000〜7,999円</td></tr></tbody>
+      </table>
+    </div>
+    <h3 class="sub">主な出典</h3>
+    <ul class="sources"><li><a href="https://www.hotpepper.jp/strJ001192067/" rel="noopener">ホットペッパー：cafe&amp;bar natural stance</a></li><li><a href="https://retty.me/area/PRE13/ARE23/SUB2301/100000726567/" rel="noopener">Retty：Bar dAZE</a></li><li><a href="https://www.hotpepper.jp/strJ003715022/" rel="noopener">ホットペッパー：ストップザシーズンインザサン</a></li><li><a href="https://www.hotpepper.jp/strJ001210835/" rel="noopener">ホットペッパー：chill チル 原宿 表参道店</a></li><li><a href="https://www.hotpepper.jp/strJ001209535/" rel="noopener">ホットペッパー：ビストロコウ</a></li><li><a href="https://retty.me/area/PRE13/ARE23/SUB2301/100001804890/" rel="noopener">Retty：表参道プラネ</a></li><li><a href="https://tabelog.com/tokyo/A1306/A130601/13300295/" rel="noopener">食べログ：LAVA LOUNGE</a></li><li><a href="https://www.hotpepper.jp/strJ004402657/" rel="noopener">ホットペッパー：SHISHA HAVEN</a></li><li><a href="https://www.hotpepper.jp/SA11/Y035/X100/U014/U027/" rel="noopener">ホットペッパー：原宿×貸切可×23時以降営業の検索結果</a></li><li><a href="https://www.bcnretail.com/market/detail/20231117_378391.html" rel="noopener">BCN RETAIL：忘年会シーズンの予約動向</a></li><li><a href="https://www.harajuku-sizzle.com/access" rel="noopener">原宿しずる 公式サイト（アクセス）</a></li></ul>
+  </section>
+</main>
+<footer class="wrap foot">
+  <p>原宿しずるからの二次会候補 ・ 2026年11月19日調査 ・ 料金・営業時間・予約状況は変わることがあります。予約前に必ず各店へ確認してください。</p>
+</footer>
+</body>
+</html>
